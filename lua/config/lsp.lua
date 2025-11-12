@@ -4,7 +4,27 @@ vim.pack.add({
 })
 
 require("mason").setup()
-vim.lsp.enable("clangd")
+
+-- Lua LSP 配置 (lua_ls)
+vim.lsp.config('lua_ls', {
+    settings = {
+        Lua = {
+            runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') }, -- Lua 运行时
+            diagnostics = { globals = { 'vim' } },                           -- 忽略全局变量 vim 的警告
+            workspace = {
+                library = vim.api.nvim_get_runtime_file('', true),
+                checkThirdParty = false,
+            },
+            format = { enable = true }, -- 启用格式化
+        },
+    },
+})
+
+for _, server in ipairs({ "clangd", "pyright", "cmake", "bashls", "jsonls", "lua_ls" }) do
+    -- vim.lsp.config(server, {})
+    vim.lsp.enable(server, {})
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("SetupLSP", {}),
     callback = function(event)

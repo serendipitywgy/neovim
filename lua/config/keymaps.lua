@@ -172,4 +172,7 @@ set_keymaps({ "n", "x", "o" }, {"S"},  function() require("which-key").show({ gl
 
 --which-key
 
-set_keymaps({ "n", "x", "o" }, {"<leader>?"}, function() require("flash").jump() end, { desc = "Flash" })
+set_keymaps({ "n", "x", "o" }, {"<leader>?"}, function() require("flash").jump() end, { desc = "which_key查询" })
+
+--lsp
+set_keymaps({ "n" }, {"<leader>lf"}, function() vim.lsp.buf.format() end, { desc = "lsp格式化" })
