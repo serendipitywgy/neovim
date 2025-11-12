@@ -10,7 +10,7 @@ vim.lsp.config('lua_ls', {
     settings = {
         Lua = {
             runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') }, -- Lua 运行时
-            diagnostics = { globals = { 'vim' } },                           -- 忽略全局变量 vim 的警告
+            diagnostics = { globals = { 'vim' } },                                 -- 忽略全局变量 vim 的警告
             workspace = {
                 library = vim.api.nvim_get_runtime_file('', true),
                 checkThirdParty = false,
@@ -24,6 +24,22 @@ for _, server in ipairs({ "clangd", "pyright", "cmake", "bashls", "jsonls", "lua
     -- vim.lsp.config(server, {})
     vim.lsp.enable(server, {})
 end
+
+-- 配置lsp报警图标
+local icons = require("config/icons")
+vim.diagnostic.config {
+    virtual_text = { current_line = true },
+    float = { severity_sort = true },
+    severity_sort = true,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+            [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+        },
+    },
+}
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("SetupLSP", {}),

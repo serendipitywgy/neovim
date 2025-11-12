@@ -1,4 +1,3 @@
-
 -- 自动命令配置
 local function augroup(name)
     return vim.api.nvim_create_augroup("my_" .. name, { clear = true })
@@ -137,14 +136,31 @@ vim.api.nvim_create_autocmd("ColorScheme", {
         -- 可以添加更多高亮组...
     end,
 })
--- 为cpp文件设置禁止自动格式化
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "cpp",
-    callback = function()
-        vim.b.autoformat = false
+-- -- 为cpp文件设置禁止自动格式化
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = "cpp",
+--     callback = function()
+--         vim.b.autoformat = false
+--     end,
+-- })
+-- 保存时自动格式化
+local group = vim.api.nvim_create_augroup('lsp_format', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePre', {
+    group = group,
+    pattern = '*', -- 监听全部文件
+    callback = function(args)
+        -- 排除 C/C++ 的常见后缀（大小写都防一手）
+        local ext = vim.fn.fnamemodify(args.match, ':e'):lower()
+        if ext == 'cpp' or ext == 'cxx' or ext == 'cc' or ext == 'c' or ext == 'h' or ext == 'hpp' then
+            return -- 直接跳出，不格式化
+        end
+
+        -- 其余文件：只要该缓冲区有 LSP 客户端就格式化
+        if #vim.lsp.get_active_clients({ bufnr = args.buf }) > 0 then
+            vim.lsp.buf.format({ async = false, bufnr = args.buf })
+        end
     end,
 })
-
 --lsp的一些自动命令
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -189,6 +205,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, { buffer = event.buf, desc = 'LSP: Toggle Inlay Hints' })
         end
-
     end
 })

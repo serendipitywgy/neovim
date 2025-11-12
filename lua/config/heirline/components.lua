@@ -446,7 +446,7 @@ M.FileFlags = {
                 'dap-repl',
             }
             local result = vim.fn.fnamemodify(self.filename, ':.') ~= '' and
-            vim.api.nvim_get_option_value('modified', { buf = self.bufnr })
+                vim.api.nvim_get_option_value('modified', { buf = self.bufnr })
             local ft = vim.api.nvim_get_option_value('buftype', { buf = self.bufnr })
             if vim.tbl_contains(ignored_filetypes, ft) then
                 result = false
@@ -461,7 +461,7 @@ M.FileFlags = {
     {
         condition = function(self)
             return not vim.api.nvim_get_option_value('modifiable', { buf = self.bufnr }) or
-            vim.api.nvim_get_option_value('readonly', { buf = self.bufnr })
+                vim.api.nvim_get_option_value('readonly', { buf = self.bufnr })
         end,
         provider = function(self)
             if vim.api.nvim_get_option_value('buftype', { buf = self.bufnr }) == 'terminal' then
@@ -553,7 +553,7 @@ M.SearchOccurrence = {
     provider = function()
         local sinfo = vim.fn.searchcount { maxcount = 0 }
         local search_stat = sinfo.incomplete > 0 and ' [?/?]' or
-        sinfo.total > 0 and (' [%s/%s]'):format(sinfo.current, sinfo.total) or ''
+            sinfo.total > 0 and (' [%s/%s]'):format(sinfo.current, sinfo.total) or ''
         return search_stat
     end,
 }

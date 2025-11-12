@@ -11,9 +11,9 @@ vim.api.nvim_create_autocmd('BufReadPre', {
             ensure_installed = {
                 'diff',
                 'snakemake',
-                "lua", "vim", "vimdoc", "query",  -- Neovim 相关
-                "python", "javascript", "typescript", "c", "cpp", "cmake",  -- 常用编程语言
-                "html", "css", "json", "yaml", "markdown", "markdown_inline", "toml"  -- 标记语言
+                "lua", "vim", "vimdoc", "query",                                     -- Neovim 相关
+                "python", "javascript", "typescript", "c", "cpp", "cmake",           -- 常用编程语言
+                "html", "css", "json", "yaml", "markdown", "markdown_inline", "toml" -- 标记语言
             },
             ignore_install = {
                 'latex',
