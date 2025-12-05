@@ -3,6 +3,32 @@ local function augroup(name)
     return vim.api.nvim_create_augroup("my_" .. name, { clear = true })
 end
 
+-- lsp重命名
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        local bufnr = args.buf
+        vim.keymap.set("n", "<leader>rn", function()
+            -- 弹出输入框，输入新名字
+            local curr_word = vim.fn.expand("<cword>")
+            vim.ui.input({ prompt = "Rename to: ", default = curr_word }, function(new_name)
+                if new_name and #new_name > 0 then
+                    vim.lsp.buf.rename(new_name)
+                end
+            end)
+        end, { buffer = bufnr, desc = "LSP Rename" })
+    end,
+})
+-- 全文件匹配重命名
+vim.keymap.set("n", "<leader>rf", function()
+    local curr_word = vim.fn.expand("<cword>")
+    vim.ui.input({ prompt = "Rename all in file: ", default = curr_word }, function(new_name)
+        if new_name and #new_name > 0 then
+            -- 构造替换命令，%s 表示全文件，\V 精确匹配
+            local cmd = string.format("%%s/\\V%s/%s/g", curr_word, new_name)
+            vim.cmd(cmd)
+        end
+    end)
+end, { desc = "Rename in file" })
 -- 在这里可以添加其他自动命令
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {

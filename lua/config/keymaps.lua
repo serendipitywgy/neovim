@@ -77,7 +77,7 @@ set_keymaps("n", { "<Esc>" }, "<cmd>nohlsearch<CR>", { silent = true })
 
 --snacks的快捷键
 -- 通用
-set_keymaps("n", { "<leader>e" }, function() Snacks.explorer() end, { desc = "File Explorer" })
+-- set_keymaps("n", { "<leader>e" }, function() Snacks.explorer() end, { desc = "File Explorer" })
 set_keymaps("n", { "<leader><space>" }, function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
 set_keymaps("n", { "<leader>," }, function() Snacks.picker.buffers() end, { desc = "Buffers" })
 set_keymaps("n", { "<leader>/" }, function() Snacks.picker.grep() end, { desc = "Grep" })

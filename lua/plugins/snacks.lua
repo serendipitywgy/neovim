@@ -35,7 +35,7 @@ require("snacks").setup({
     --         { section = "startup" },
     --     },
     -- },
-    explorer = { enabled = true, replace_netrw = true },
+    explorer = { enabled = false, replace_netrw = true },
     indent = {
         enabled = true,
         animate = {
