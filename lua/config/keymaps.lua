@@ -182,3 +182,12 @@ set_keymaps({ "n", "x", "o" }, { "<leader>?" }, function() require("flash").jump
 
 --lsp
 set_keymaps({ "n" }, { "<leader>lf" }, function() vim.lsp.buf.format() end, { desc = "lsp格式化" })
+
+
+set_keymaps("i", { "<C-g>" }, function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+set_keymaps("i", { "<C-h>" }, function() return vim.fn['codeium#AcceptNextWord']() end, { expr = true, silent = true })
+set_keymaps("i", { "<C-j>" }, function() return vim.fn['codeium#AcceptNextLine']() end, { expr = true, silent = true })
+set_keymaps("i", { "<C-;>" }, function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
+set_keymaps("i", { "<C-,>" }, function() return vim.fn['codeium#CycleCompletions'](-1) end,
+    { expr = true, silent = true })
+set_keymaps("i", { "<C-x>" }, function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
