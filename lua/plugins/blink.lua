@@ -104,6 +104,10 @@ local function blink_cmp2()
             documentation = {
                 auto_show = true
             },
+            ghost_text = {
+                enabled = true,
+                show_with_menu = false
+            },
             menu = {
                 draw = {
                     treesitter = { 'lsp', },
@@ -161,6 +165,8 @@ local function blink_cmp2()
                 preset = "super-tab",
             },
             completion = {
+                -- ghost_text = { enabled = true },
+                -- menu的优先级比ghost_text高, 所以当menu显示时, ghost_text不会显示
                 menu = {
                     auto_show = true
                 }

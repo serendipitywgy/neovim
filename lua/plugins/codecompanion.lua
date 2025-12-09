@@ -1,9 +1,31 @@
 vim.pack.add({
-    { src = "https://github.com/olimorris/codecompanion.nvim" },
+    {
+        src = "https://github.com/olimorris/codecompanion.nvim",
+        version = vim.version.range('v17.33.0'),
+    },
     { src = "https://github.com/nvim-lua/plenary.nvim" },
     { src = "https://github.com/zbirenbaum/copilot.lua" },
 })
 
+require("copilot").setup({
+    suggestion = {
+        enabled = true,                -- 启用建议功能
+        auto_trigger = false,          -- 自动触发建议
+        hide_during_completion = true, -- 在完成时隐藏建议
+        debounce = 75,                 -- 建议的防抖时间（毫秒）
+        trigger_on_accept = true,      -- 在接受建议时触发新的建议
+        keymap = {
+            accept = "<Tab>",          -- 按 Tab 键接受建议
+            next = "<C-j>",            -- 下一个建议
+            prev = "<C-k>",            -- 上一个建议
+            dismiss = "<C-]>",         -- 关闭建议
+            --
+        },
+    },
+    filetypes = {
+        ["*"] = true, -- 所有文件类型都启用 Copilot
+    },
+})
 require("codecompanion").setup({
     opts = {
         log_level = "DEBUG",
