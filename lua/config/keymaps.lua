@@ -41,13 +41,13 @@ set_keymaps("n", { "<leader>bD" }, "<cmd>:bd<cr>", { desc = "Delete Buffer and W
 -- lazy
 -- set_keymaps("n", { "<leader>l" }, "<cmd>Lazy<cr>", { desc = "Lazy" })
 
--- formatting
-set_keymaps({ "n", "v" }, { "<leader>cf" }, function()
-    require("conform").format()
-end, { desc = "Format" })
+--lsp formatting
+set_keymaps({ "n" }, { "<leader>lf" }, function() vim.lsp.buf.format() end, { desc = "lsp格式化" })
 
 -- quit
 set_keymaps("n", { "<leader>qq" }, "<cmd>wqa<cr>", { desc = "Quit All" })
+set_keymaps("n", { "<leader>w" }, "<cmd>w<cr>", { desc = "保存当前Buffer", nowait = true })
+set_keymaps("n", { "<leader>q" }, "<cmd>q<cr>", { desc = "退出当前Buffer", nowait = true }) -- nowait: 不延迟
 
 -- highlights under cursor
 set_keymaps("n", { "<leader>ui" }, vim.show_pos, { desc = "Inspect Pos" })
@@ -180,8 +180,6 @@ set_keymaps({ "n", "x", "o" }, { "S" }, function() require("which-key").show({ g
 
 set_keymaps({ "n", "x", "o" }, { "<leader>?" }, function() require("flash").jump() end, { desc = "which_key查询" })
 
---lsp
-set_keymaps({ "n" }, { "<leader>lf" }, function() vim.lsp.buf.format() end, { desc = "lsp格式化" })
 
 
 set_keymaps("i", { "<C-g>" }, function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })

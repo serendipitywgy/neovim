@@ -10,20 +10,21 @@ local config = {
         number = true,
         relativenumber = true,
         autoindent = true,
-        wrap = true,         -- 启用自动换行
-        colorcolumn = "150", -- 在第150列显示垂直线，用于提示代码宽度
-        cursorline = true,   -- 高亮当前行
-        ignorecase = true,   -- 搜索时忽略大小写
-        smartcase = true,    -- 如果搜索包含大写字母，则变为大小写敏感
-        expandtab = true,    -- 将制表符展开为空格
-        softtabstop = 4,     -- 软制表符宽度为4
-        shiftwidth = 4,      -- 自动缩进宽度为4
-        tabstop = 4,         -- 制表符宽度为4
-        cindent = true,      -- 启用C语言样式缩进
-        cino = "(0,W4",      -- 设置C语言缩进选项
-        splitbelow = true,   -- 新窗口在下方
-        splitright = true,   -- 新窗口在右边
-        undofile = true,     --启用了 Neovim 的持久化撤销历史功能
+        wrap = true,           -- 启用自动换行
+        colorcolumn = "150",   -- 在第150列显示垂直线，用于提示代码宽度
+        cursorline = true,     -- 高亮当前行
+        ignorecase = true,     -- 搜索时忽略大小写
+        smartcase = true,      -- 如果搜索包含大写字母，则变为大小写敏感
+        expandtab = true,      -- 将制表符展开为空格
+        softtabstop = 4,       -- 软制表符宽度为4
+        shiftwidth = 4,        -- 自动缩进宽度为4
+        tabstop = 4,           -- 制表符宽度为4
+        cindent = true,        -- 启用C语言样式缩进
+        cino = "(0,W4",        -- 设置C语言缩进选项
+        splitbelow = true,     -- 新窗口在下方
+        splitright = true,     -- 新窗口在右边
+        undofile = true,       --启用了 Neovim 的持久化撤销历史功能
+        virtualedit = "block", -- 允许虚拟编辑, 允许在不可见的字符上进行操作
 
 
         -- 设置窗口标题为当前文件名或项目名
